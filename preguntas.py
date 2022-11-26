@@ -15,7 +15,7 @@ def pregunta_01():
     Complete el código presentado a continuación.
     """
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
-    df = pd.read_csv('gm_2008_region.csv', sep=",")
+    df = pd.read_csv("gm_2008_region.csv", sep=",")
 
     # Asigne la columna "life" a `y` y la columna "fertility" a `X`
     y = df["life"].values
@@ -28,10 +28,10 @@ def pregunta_01():
     print(X.shape)
 
     # Transforme `y` a un array de numpy usando reshape
-    y_reshaped = y.reshape(-1, 1)
+    y_reshaped = y.reshape(y.shape[0], -1)
 
     # Trasforme `X` a un array de numpy usando reshape
-    X_reshaped = X.reshape(-1, 1)
+    X_reshaped = X.reshape(X.shape[0], -1)
 
     # Imprima las nuevas dimensiones de `y`
     print(y_reshaped.shape)
@@ -47,22 +47,22 @@ def pregunta_02():
     """
 
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
-    df = pd.read_csv('gm_2008_region.csv', sep=",")
+    df = pd.read_csv("gm_2008_region.csv", sep=",")
 
     # Imprima las dimensiones del DataFrame
     print(df.shape)
 
     # Imprima la correlación entre las columnas `life` y `fertility` con 4 decimales.
-    print(df['life'].corr(df['fertility']).round(decimals=4))
+    print(round(df["life"].corr(df["fertility"]), 4))
 
     # Imprima la media de la columna `life` con 4 decimales.
-    print(df['life'].mean().round(decimals=4))
+    print(round(df["life"].mean(), 4))
 
     # Imprima el tipo de dato de la columna `fertility`.
-    print(type(df['fertility']))
+    print(type(df["fertility"]))
 
     # Imprima la correlación entre las columnas `GDP` y `life` con 4 decimales.
-    print(df['GDP'].corr(df['life']).round(decimals=4))
+    print(round(df["GDP"].corr(df["life"]), 4))
 
 
 def pregunta_03():
@@ -72,13 +72,13 @@ def pregunta_03():
     """
 
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
-    df = pd.read_csv('gm_2008_region.csv', sep=",")
+    df = pd.read_csv("gm_2008_region.csv", sep=",")
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = df["fertility"].values.reshape(-1,1)df["life"].values.reshape(-1,1)
+    X_fertility = df["fertility"].values.reshape(-1, 1)
 
     # Asigne a la variable los valores de la columna `life`
-    y_life = df["life"].values.reshape(-1,1)
+    y_life = df["life"].values.reshape(-1, 1)
 
     # Importe LinearRegression
     from sklearn.linear_model import LinearRegression
@@ -91,7 +91,7 @@ def pregunta_03():
     prediction_space = np.linspace(
         min(X_fertility),
         max(X_fertility),
-    ).reshape(-1,1)
+    ).reshape(-1, 1)
 
     # Entrene el modelo usando X_fertility y y_life
     reg.fit(X_fertility, y_life)
@@ -100,7 +100,7 @@ def pregunta_03():
     y_pred = reg.predict(prediction_space)
 
     # Imprima el R^2 del modelo con 4 decimales
-    print(reg.score(X_fertility, y_life).round(decimals=4))
+    print(reg.score(X_fertility, y_life).round(4))
 
 
 def pregunta_04():
@@ -117,13 +117,13 @@ def pregunta_04():
     from sklearn.metrics import mean_squared_error
 
     # Lea el archivo `gm_2008_region.csv` y asignelo al DataFrame `df`
-    df = pd.read_csv('gm_2008_region.csv', sep=",")
+    df = pd.read_csv("gm_2008_region.csv", sep=",")
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = df["fertility"].values.reshape(-1,1)
+    X_fertility = df["fertility"].values.reshape(-1, 1)
 
     # Asigne a la variable los valores de la columna `life`
-    y_life = df["life"].values.reshape(-1,1)
+    y_life = df["life"].values.reshape(-1, 1)
 
     # Divida los datos de entrenamiento y prueba. La semilla del generador de números
     # aleatorios es 53. El tamaño de la muestra de entrenamiento es del 80%
@@ -139,7 +139,7 @@ def pregunta_04():
 
     # Entrene el clasificador usando X_train y y_train
     linearRegression.fit(X_train, y_train)
-    
+
     # Pronostique y_test usando X_test
     y_pred = linearRegression.predict(X_test)
 
